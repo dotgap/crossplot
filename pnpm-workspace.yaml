@@ -1,0 +1,19 @@
+packages:
+  - packages/*
+  - examples/*
+  - docs
+
+overrides:
+  # VitePress 1 asks for vite 5, which no longer gets security fixes; the docs build on vite 6.
+  vitepress>vite: ^6.4.4
+
+# Supply-chain hardening.
+# Only resolve versions that have been public for 3 days, so a compromised release is usually
+# caught and pulled first (Dependabot waits a week, see .github/dependabot.yml).
+minimumReleaseAge: 4320
+# Refuse a version whose publish trust signals (provenance, trusted publisher) got weaker than earlier ones.
+trustPolicy: no-downgrade
+# No dependency runs install scripts. esbuild works without its postinstall step.
+strictDepBuilds: true
+ignoredBuiltDependencies:
+  - esbuild

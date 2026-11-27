@@ -1,0 +1,59 @@
+{
+  "name": "@crossplot/plot",
+  "version": "0.1.0",
+  "description": "Observable Plot renderer for crossplot charts.",
+  "keywords": [
+    "crossfilter",
+    "cross-filter",
+    "coordinated-views",
+    "linked-charts",
+    "brushing",
+    "dashboard",
+    "data-visualization",
+    "charts",
+    "typescript",
+    "observable-plot",
+    "plot",
+    "renderer"
+  ],
+  "homepage": "https://dotgap.github.io/crossplot/",
+  "bugs": {
+    "url": "https://github.com/dotgap/crossplot/issues"
+  },
+  "license": "MIT",
+  "author": "The crossplot authors",
+  "type": "module",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotgap/crossplot.git",
+    "directory": "packages/plot"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "peerDependencies": {
+    "@crossplot/core": "workspace:^",
+    "@observablehq/plot": "^0.6.17"
+  },
+  "devDependencies": {
+    "@crossplot/core": "workspace:^",
+    "@observablehq/plot": "^0.6.19"
+  }
+}

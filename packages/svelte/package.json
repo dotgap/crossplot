@@ -1,0 +1,60 @@
+{
+  "name": "@crossplot/svelte",
+  "version": "0.1.0",
+  "description": "Svelte 5 runes and a chart action for crossplot dashboards.",
+  "keywords": [
+    "crossfilter",
+    "cross-filter",
+    "coordinated-views",
+    "linked-charts",
+    "brushing",
+    "dashboard",
+    "data-visualization",
+    "charts",
+    "typescript",
+    "svelte",
+    "runes"
+  ],
+  "homepage": "https://dotgap.github.io/crossplot/",
+  "bugs": {
+    "url": "https://github.com/dotgap/crossplot/issues"
+  },
+  "license": "MIT",
+  "author": "The crossplot authors",
+  "type": "module",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotgap/crossplot.git",
+    "directory": "packages/svelte"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "svelte": "./dist/index.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "peerDependencies": {
+    "@crossplot/core": "workspace:^",
+    "svelte": "^5.0.0"
+  },
+  "devDependencies": {
+    "@crossplot/core": "workspace:^",
+    "svelte": "^5.57.3"
+  }
+}

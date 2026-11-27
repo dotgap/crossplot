@@ -1,0 +1,29 @@
+[
+  { "name": "@crossplot/core", "entry": "packages/core/dist/index.js", "limit": "16 kB" },
+  { "name": "@crossplot/core/dom", "entry": "packages/core/dist/dom/index.js", "limit": "1.5 kB" },
+  { "name": "@crossplot/core/worker", "entry": "packages/core/dist/worker.js", "limit": "12.5 kB" },
+  {
+    "name": "@crossplot/plot",
+    "entry": "packages/plot/dist/index.js",
+    "external": ["@crossplot/core", "@observablehq/plot"],
+    "limit": "8.5 kB"
+  },
+  {
+    "name": "@crossplot/react",
+    "entry": "packages/react/dist/index.js",
+    "external": ["@crossplot/core", "react"],
+    "limit": "1.5 kB"
+  },
+  {
+    "name": "@crossplot/vue",
+    "entry": "packages/vue/dist/index.js",
+    "external": ["@crossplot/core", "vue"],
+    "limit": "1.5 kB"
+  },
+  {
+    "name": "@crossplot/svelte",
+    "entry": "packages/svelte/dist/index.js",
+    "external": ["@crossplot/core", "svelte", "svelte/*"],
+    "limit": "1.5 kB"
+  }
+]

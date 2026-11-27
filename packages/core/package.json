@@ -1,0 +1,61 @@
+{
+  "name": "@crossplot/core",
+  "version": "0.1.0",
+  "description": "Headless, zero-dependency cross-filter engine for coordinated charts.",
+  "keywords": [
+    "crossfilter",
+    "cross-filter",
+    "coordinated-views",
+    "linked-charts",
+    "brushing",
+    "dashboard",
+    "data-visualization",
+    "charts",
+    "typescript",
+    "dc.js",
+    "web-worker",
+    "headless"
+  ],
+  "homepage": "https://dotgap.github.io/crossplot/",
+  "bugs": {
+    "url": "https://github.com/dotgap/crossplot/issues"
+  },
+  "license": "MIT",
+  "author": "The crossplot authors",
+  "type": "module",
+  "sideEffects": [
+    "./dist/worker.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotgap/crossplot.git",
+    "directory": "packages/core"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./dom": {
+      "types": "./dist/dom/index.d.ts",
+      "default": "./dist/dom/index.js"
+    },
+    "./worker": {
+      "types": "./dist/worker.d.ts",
+      "default": "./dist/worker.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -b"
+  }
+}

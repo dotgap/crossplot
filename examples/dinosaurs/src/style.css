@@ -1,0 +1,595 @@
+:root {
+  color-scheme: light;
+  /* Neutral paper and ink; crossplot blue for data, a signal yellow to point things out. */
+  --bg: #f6f6f4;
+  --ink: #121212;
+  --ink-2: #3e3e42;
+  --ink-3: #6c6c72;
+  --rule: #dcdcdf;
+  --panel: #ffffff;
+  --pop: #ffd000;
+  --accent: #3b6cf0;
+  --accent-ink: #2448b8;
+  --muted-mark: #d4d6dc;
+  --highlight: #ffe766;
+  --photo-bg: #0b0b0c;
+
+  /* Family colors: categorical slots validated for adjacent stacking (light surface). */
+  --g-theropods: #d1435b;
+  --g-longnecks: #3b6cf0;
+  --g-duckbills: #13a39b;
+  --g-horned: #e0a100;
+  --g-armored: #7a5cd6;
+  --g-unknown: #a9adb7;
+
+  --serif: "Newsreader", "Iowan Old Style", "Charter", Georgia, serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --text: 640px;
+  --wide: 1000px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0e0e0f;
+    --ink: #ededeb;
+    --ink-2: #bdbdbb;
+    --ink-3: #8b8b8f;
+    --rule: #2a2a2d;
+    --panel: #171719;
+    --pop: #ffd000;
+    --accent: #4f7cff;
+    --accent-ink: #9db8ff;
+    --muted-mark: #2e2e33;
+    --highlight: #4a3d00;
+
+    --g-theropods: #d9526b;
+    --g-longnecks: #4f7cff;
+    --g-duckbills: #14968e;
+    --g-horned: #b98500;
+    --g-armored: #8a72ea;
+    --g-unknown: #55575e;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1.1875rem / 1.6 var(--serif);
+  -webkit-font-smoothing: antialiased;
+  --crossplot-tooltip-bg: var(--panel);
+  --crossplot-tooltip-fg: var(--ink);
+  --crossplot-tooltip-border: var(--rule);
+}
+
+a {
+  color: var(--accent-ink);
+}
+
+/* --- Hero ------------------------------------------------------------------ */
+.hero {
+  max-width: var(--text);
+  margin: 0 auto;
+  padding: 72px 16px 8px;
+}
+.kicker {
+  font: 600 0.75rem / 1.2 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #121212;
+  background: var(--pop);
+  display: inline-block;
+  padding: 5px 8px 4px;
+  margin: 0 0 18px;
+}
+h1 {
+  font: 700 clamp(2.25rem, 6vw, 3.5rem) / 1.05 var(--serif);
+  letter-spacing: -0.015em;
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+.dek {
+  font-size: 1.375rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+  margin: 0 0 24px;
+  text-wrap: pretty;
+}
+.lede {
+  margin: 0 0 1.1em;
+  text-wrap: pretty;
+}
+.lede.drop .cap {
+  float: left;
+  font: 700 4.1em / 0.8 var(--serif);
+  padding: 0.08em 0.06em 0 0;
+  color: var(--ink);
+}
+/* Small-caps lead-in ties the drop cap to its word, magazine style. */
+.lede.drop .lead {
+  text-transform: uppercase;
+  font-size: 0.8em;
+  letter-spacing: 0.07em;
+  font-weight: 600;
+  color: var(--ink);
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.howto {
+  font: 400 0.95rem / 1.55 var(--sans);
+  color: var(--ink-2);
+  border-left: 5px solid var(--pop);
+  padding: 2px 0 2px 14px;
+  margin: 28px 0 32px;
+}
+.howto strong {
+  color: var(--ink);
+}
+
+.photo {
+  margin: 8px -16px 32px;
+}
+.photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--photo-bg);
+}
+.photo figcaption {
+  display: block;
+  border: 0;
+  padding: 8px 16px 0;
+  margin: 0;
+  font: 400 0.8rem / 1.5 var(--sans);
+  color: var(--ink-3);
+}
+.photo .credit {
+  white-space: nowrap;
+}
+.photo a {
+  color: inherit;
+}
+@media (min-width: 900px) {
+  .photo {
+    margin: 8px -180px 36px;
+  }
+  .photo figcaption {
+    padding: 8px 0 0;
+  }
+}
+
+/* --- Explore: every chart in one grid --------------------------------------- */
+.explore {
+  max-width: 1240px;
+  margin: 48px auto 0;
+  padding: 40px 0 8px;
+  border-top: 4px double var(--rule);
+}
+.explore-head {
+  max-width: var(--text);
+  margin: 0 auto 24px;
+}
+.explore-head p {
+  margin: 0;
+  text-wrap: pretty;
+}
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.explore-grid .cell {
+  margin: 0;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 10px 14px 12px;
+  min-width: 0;
+}
+.explore-grid .cell figcaption {
+  border-top: 0;
+  padding-top: 0;
+  margin-bottom: 4px;
+}
+.explore-grid .cell figcaption .title {
+  font-size: 0.85rem;
+}
+.explore-grid .cell figcaption.sub {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+}
+.explore-grid .span-2 {
+  grid-column: span 2;
+}
+.explore-grid .chart svg {
+  font-size: 11px;
+}
+.genera.compact {
+  margin: 6px 0 0;
+  gap: 5px;
+}
+.genera.compact .genus {
+  font-size: 0.82rem;
+  padding: 3px 7px 5px;
+}
+@media (max-width: 1000px) {
+  .explore-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .explore-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .explore-grid .span-2 {
+    grid-column: auto;
+  }
+}
+
+/* --- Sticky selection sentence --------------------------------------------- */
+.selection {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+.selection-inner {
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  font: 400 0.9rem / 1.4 var(--sans);
+  color: var(--ink-2);
+}
+.selection p {
+  margin: 0;
+}
+.selection strong {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+#reset {
+  flex: none;
+  font: 600 0.8rem var(--sans);
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+#reset:hover {
+  border-color: var(--ink-3);
+}
+
+/* --- Chapters -------------------------------------------------------------- */
+main {
+  padding: 0 16px;
+}
+.chapter {
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding: 48px 0 24px;
+}
+.chapter > h2,
+.chapter > p,
+.chapter > .genera {
+  max-width: var(--text);
+  margin-left: auto;
+  margin-right: auto;
+}
+h2 {
+  font: 700 1.875rem / 1.15 var(--serif);
+  letter-spacing: -0.01em;
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+.chapter > p {
+  margin-top: 0;
+  margin-bottom: 1.1em;
+  text-wrap: pretty;
+}
+
+figure {
+  margin: 28px auto 32px;
+  min-width: 0;
+}
+figure.narrow {
+  max-width: var(--text);
+}
+figure.medium {
+  max-width: 800px;
+}
+figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  align-items: baseline;
+  justify-content: space-between;
+  border-top: 2px solid var(--ink);
+  padding-top: 8px;
+  margin-bottom: 8px;
+  font-family: var(--sans);
+}
+figcaption .title {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.hint {
+  font-size: 0.8rem;
+  color: var(--ink-3);
+}
+.hint[data-hint="drag"]::before {
+  content: "↔ ";
+}
+.hint[data-hint="click"]::before {
+  content: "● ";
+  font-size: 0.6rem;
+  vertical-align: 2px;
+}
+.note {
+  font: 400 0.8rem / 1.45 var(--sans);
+  color: var(--ink-3);
+  margin: 6px 0 0;
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 40px;
+}
+.pair figure {
+  margin: 28px 0 32px;
+}
+@media (max-width: 760px) {
+  .pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Charts: Plot draws SVG; set type and ink here. */
+.chart {
+  min-width: 0;
+  color: var(--ink-2);
+}
+.chart svg {
+  font-family: var(--sans);
+  font-size: 12px;
+}
+.crossplot-overlay {
+  color: var(--ink);
+}
+
+/* --- Story links in the prose ---------------------------------------------- */
+button.story {
+  font: inherit;
+  color: inherit;
+  background: linear-gradient(transparent 60%, var(--highlight) 60%);
+  border: 0;
+  border-bottom: 1.5px dotted var(--ink-3);
+  padding: 0 1px;
+  cursor: pointer;
+}
+button.story:hover {
+  background: var(--highlight);
+}
+button.story::after {
+  content: " ↗";
+  font: 600 0.7em var(--sans);
+  color: var(--ink-3);
+}
+
+/* --- Legend chips (they filter by family) --------------------------------- */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  margin: 4px 0 12px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 500 0.8rem var(--sans);
+  color: var(--ink);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 4px 10px 4px 8px;
+  cursor: pointer;
+}
+.chip .swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--swatch);
+}
+.chip:hover {
+  border-color: var(--ink-3);
+}
+.legend.has-selection .chip[aria-pressed="false"] {
+  opacity: 0.45;
+}
+.chip[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: var(--panel);
+}
+
+/* --- Genera ----------------------------------------------------------------- */
+.genera {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px auto 8px;
+  font-family: var(--sans);
+}
+.genus {
+  position: relative;
+  display: inline-flex;
+  gap: 8px;
+  align-items: baseline;
+  font: 400 0.95rem var(--serif);
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 5px 10px 7px;
+  cursor: pointer;
+  overflow: hidden;
+}
+.genus::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: calc(var(--share) * 100%);
+  background: var(--accent);
+}
+.genus span {
+  font: 500 0.75rem var(--sans);
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.genus[aria-pressed="true"] {
+  border-color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+.genus:hover {
+  border-color: var(--ink-3);
+}
+
+/* --- Table ------------------------------------------------------------------ */
+.rows {
+  overflow-x: auto;
+  font-family: var(--sans);
+}
+.crossplot-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+.crossplot-table th,
+.crossplot-table td {
+  text-align: left;
+  padding: 7px 10px 7px 0;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+.crossplot-table td:first-child {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
+}
+.crossplot-table th button {
+  font: 600 0.75rem var(--sans);
+  color: var(--ink-2);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.crossplot-table th[aria-sort="ascending"] button::after {
+  content: " ▲";
+}
+.crossplot-table th[aria-sort="descending"] button::after {
+  content: " ▼";
+}
+.crossplot-pager {
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--ink-2);
+}
+.crossplot-pager button {
+  font: 500 0.8rem var(--sans);
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+.crossplot-pager button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* --- Footer ----------------------------------------------------------------- */
+footer {
+  max-width: var(--text);
+  margin: 32px auto 0;
+  padding: 24px 16px 64px;
+  border-top: 1px solid var(--rule);
+  font: 400 0.8rem / 1.6 var(--sans);
+  color: var(--ink-3);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* --- Map ----------------------------------------------------------------------- */
+:root {
+  --land: #e4e2dc;
+  --crossplot-dot-stroke: rgba(255, 255, 255, 0.75);
+  --crossplot-shade: var(--bg);
+  --crossplot-share-label: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --land: #25262d;
+    --crossplot-dot-stroke: rgba(14, 14, 15, 0.8);
+  }
+}
+.map-figure {
+  max-width: var(--wide);
+}
+.crossplot-layouts {
+  display: inline-flex;
+  gap: 0;
+  margin: 0 0 10px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 3px;
+  background: var(--panel);
+}
+.crossplot-layouts button {
+  font: 500 0.85rem / 1 var(--sans);
+  color: var(--ink-2);
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+.crossplot-layouts button[aria-pressed="true"] {
+  background: var(--pop);
+  color: #121212;
+}
+.crossplot-layouts button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

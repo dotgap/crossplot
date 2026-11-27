@@ -1,0 +1,39 @@
+{
+  "name": "crossplot-monorepo",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm -r --filter \"./packages/*\" build",
+    "typecheck": "tsc -b packages/core packages/plot packages/react packages/vue packages/svelte && tsc -p tsconfig.test.json && pnpm --filter dinosaurs typecheck && pnpm --filter docs typecheck",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "check:deps": "node scripts/check-core-deps.mjs",
+    "check:size": "node scripts/check-size.mjs",
+    "check:packages": "node scripts/check-packages.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "changeset": "changeset",
+    "release": "pnpm build && pnpm check:packages && changeset publish",
+    "bench": "pnpm build && node bench/engine.mjs",
+    "bench:ci": "pnpm build && node bench/engine.mjs 1000000,10000000 --json bench.json --markdown bench.md",
+    "demo": "pnpm --filter dinosaurs dev",
+    "docs": "pnpm --filter docs dev"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.8",
+    "@changesets/changelog-github": "^1.0.1",
+    "@changesets/cli": "^3.0.3",
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@types/node": "^22.20.5",
+    "esbuild": "0.28.2",
+    "jsdom": "^27.0.0",
+    "publint": "^0.3.25",
+    "svelte": "^5.57.3",
+    "typescript": "~5.9.3",
+    "vitest": "^4.1.11"
+  }
+}

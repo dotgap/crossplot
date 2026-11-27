@@ -1,0 +1,62 @@
+{
+  "name": "@crossplot/react",
+  "version": "0.1.0",
+  "description": "React hooks and components for crossplot dashboards.",
+  "keywords": [
+    "crossfilter",
+    "cross-filter",
+    "coordinated-views",
+    "linked-charts",
+    "brushing",
+    "dashboard",
+    "data-visualization",
+    "charts",
+    "typescript",
+    "react",
+    "hooks"
+  ],
+  "homepage": "https://dotgap.github.io/crossplot/",
+  "bugs": {
+    "url": "https://github.com/dotgap/crossplot/issues"
+  },
+  "license": "MIT",
+  "author": "The crossplot authors",
+  "type": "module",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotgap/crossplot.git",
+    "directory": "packages/react"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "peerDependencies": {
+    "@crossplot/core": "workspace:^",
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@crossplot/core": "workspace:^",
+    "@testing-library/react": "^16.3.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
+}

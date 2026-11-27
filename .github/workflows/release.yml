@@ -1,0 +1,70 @@
+name: Release
+
+# Versions and publishes the @crossplot/* packages with Changesets.
+#
+# On each push to main, pending changesets are collected into a "chore: version packages" pull request.
+# Merging that pull request bumps versions, writes the changelogs and publishes to npm, then tags the
+# release and creates GitHub releases.
+#
+# Publishing uses npm trusted publishing (OpenID Connect): there is no npm token anywhere. npm accepts
+# the publish only from this repository, this workflow file and the `npm` environment, as configured
+# for each package on npmjs.com, and it adds a provenance attestation on its own. See LAUNCH.md.
+#
+# Off until launch: the job only runs when the repository variable RELEASE_ENABLED is "true" (pushes to
+# main), or when the workflow is run by hand from the Actions tab.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Version or publish
+    if: github.repository == 'dotgap/crossplot' && (github.event_name == 'workflow_dispatch' || vars.RELEASE_ENABLED == 'true')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: npm
+    permissions:
+      contents: write # commit the version bump, push tags, create GitHub releases
+      pull-requests: write # open the "chore: version packages" pull request
+      id-token: write # npm trusted publishing and provenance
+    steps:
+      # Changesets pushes the version branch and the release tags with these credentials.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 # zizmor: ignore[artipacked]
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      # No dependency cache in the release job, so a poisoned cache from another workflow can't reach it.
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      # pnpm publish hands the tarball to the npm CLI, which needs 11.5.1 or later for trusted publishing.
+      - name: Require npm 11.5.1 or later
+        run: |
+          npm_version="$(npm --version)"
+          if [ "$(printf '%s\n' 11.5.1 "$npm_version" | sort -V | head -n1)" != 11.5.1 ]; then
+            echo "::error::npm $npm_version is too old for trusted publishing; it needs 11.5.1 or later."
+            exit 1
+          fi
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Create the version pull request, or publish
+        uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
+        with:
+          version-script: pnpm changeset version
+          publish-script: pnpm release
+          commit-message: "chore: version packages"
+          pr-title: "chore: version packages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # changelog links
+          NPM_CONFIG_PROVENANCE: "true"

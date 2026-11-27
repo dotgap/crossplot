@@ -1,0 +1,39 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    # Wait a week before proposing a new release, so a compromised version is usually
+    # caught and pulled before it reaches the lockfile.
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 5
+    # The docs stay on vite 5 because VitePress 1 needs it, and a major vite (or
+    # vite-plugin-svelte) bump from Dependabot rewrites the shared lockfile for every
+    # workspace package at once. Dependabot can't scope an ignore to one workspace
+    # package, so major bumps of these are done by hand, one package at a time.
+    ignore:
+      - dependency-name: vite
+        update-types: [version-update:semver-major]
+      - dependency-name: "@sveltejs/vite-plugin-svelte"
+        update-types: [version-update:semver-major]
+    groups:
+      dev-dependencies:
+        dependency-type: development
+        update-types: [minor, patch]
+      production-dependencies:
+        dependency-type: production
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    # Wait a week before proposing a new release, so a compromised version is usually
+    # caught and pulled before it reaches the lockfile.
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]

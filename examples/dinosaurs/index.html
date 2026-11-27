@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The dinosaur record · crossplot demo</title>
+    <meta
+      name="description"
+      content="An interactive look at 21,000 dinosaur fossil finds from the Paleobiology Database, built with crossplot."
+    />
+    <link rel="icon" href="./favicon.ico" sizes="any" />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&display=swap"
+    />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <p class="kicker">The fossil record · <span data-total>21,253</span> finds</p>
+      <h1>The Long Dig</h1>
+      <p class="dek">
+        For two centuries, people have pulled dinosaurs out of riverbanks, deserts and quarry walls. The
+        <span data-total>21,253</span> finds they wrote down tell a story of their own, about deep time, lucky rock
+        and the hunters who went looking.
+      </p>
+      <figure class="photo">
+        <img
+          src="./triceratops-1000.webp"
+          srcset="./triceratops-640.webp 640w, ./triceratops-1000.webp 1000w, ./triceratops-1600.webp 1600w"
+          sizes="(min-width: 900px) 1000px, 100vw"
+          width="1600"
+          height="992"
+          alt="A fossil Triceratops skull with its long brow horns and wide bony frill, mounted on a rock base against a dark background."
+        />
+        <figcaption>
+          A <i>Triceratops</i> skull, its brow horns longer than a person's arm. <i>Triceratops</i> is the most common
+          named dinosaur in Montana's Hell Creek rocks, the last chapter before the asteroid.
+          <span class="credit"
+            >Photo: Nekarius, <a href="https://commons.wikimedia.org/wiki/File:Triceratops_skull_houston.JPG">Wikimedia Commons</a>,
+            public domain.</span
+          >
+        </figcaption>
+      </figure>
+      <p class="lede drop">
+        <span class="cap" aria-hidden="true">I</span><span class="lead"><span class="sr-only">I</span>n the badlands of eastern Montana,</span> one summer storm can wash a <i>Triceratops</i> horn out of a hillside. The
+        bone lies in the gully, gray and cracked, 66 million years after the animal died on a warm coastal plain. In
+        1902 a fossil hunter named Barnum Brown worked these same gullies and dug out the first skeleton of
+        <i>Tyrannosaurus rex</i>.
+      </p>
+      <p class="lede">
+        That skeleton, and more than 21,000 other finds, now sit in the Paleobiology Database, a record kept by
+        scientists around the world. Read together, they show when dinosaurs lived, and how lucky we are to know them
+        at all.
+      </p>
+      <p class="howto">
+        <strong>Every chart on this page is connected.</strong> Drag across a timeline or click a bar, and every other
+        chart redraws to show only the finds you picked. The dashed outline always shows what
+        <em>all</em> finds would look like at the same size, so you can see what makes your selection different.
+      </p>
+    </header>
+
+    <div class="selection" role="status" aria-live="polite">
+      <div class="selection-inner">
+        <p id="sentence">Showing all finds.</p>
+        <button type="button" id="reset" hidden>Start over</button>
+      </div>
+    </div>
+
+    <main>
+      <section class="chapter">
+        <h2>A record written in lucky rock</h2>
+        <p>
+          Dinosaurs ruled for some 165 million years, from about 233 million years ago until an asteroid struck what is
+          now Mexico's Yucatán Peninsula, 66 million years ago. But the rock that holds their bones was never laid down
+          evenly, and much of it has since been ground to dust. Half of all finds come from the last 35 million years
+          alone.
+        </p>
+        <figure class="wide">
+          <figcaption>
+            <span class="title">Fossil finds through time, by family</span>
+            <span class="hint" data-hint="drag">Drag across the chart to pick a span of time</span>
+          </figcaption>
+          <div id="legend" class="legend"></div>
+          <div id="age" class="chart"></div>
+          <p class="note">
+            Most finds are dated only to a geological stage, a window that can be ten million years wide. Each find is
+            placed at a random point inside its own window, so the chart shows the spread the evidence allows rather
+            than piling every find onto the middle of its stage. The thickness of each band is the number of finds.
+            Millions of years ago, oldest on the left.
+          </p>
+        </figure>
+        <p>
+          That swell on the right is not a population boom. It is geography: a few rock layers so rich that
+          paleontologists return to them summer after summer. Dinosaur Park in Alberta, where the eroding badlands of
+          the Red Deer River have given up some of the most complete skeletons ever found. Two Medicine and Judith River
+          in Montana. And at the very end, Hell Creek, Lance and the Nemegt of Mongolia. Pick the last few million years
+          and you are standing in the world of <button type="button" class="story" data-story="trex">T. rex and Triceratops</button>.
+        </p>
+        <p>
+          The smaller peak, around 150 million years ago, is mostly one layer too: the Morrison Formation, a vast sheet of
+          ancient river sand that stretches from Montana to New Mexico. It is the land of the giants, and the long-necks
+          surge.
+        </p>
+      </section>
+
+      <section class="chapter">
+        <h2>Teeth, claws and beaks</h2>
+        <p>
+          Theropods, the two-legged hunters that ranged from crow-sized raptors to the 12-meter <i>Tyrannosaurus</i>,
+          lead the count by a wide margin. Part of the reason is in their mouths. A theropod shed and regrew teeth all
+          its life, scattering them like litter, and some of the most common names in the database, such as
+          <i>Richardoestesia</i> and <i>Paronychodon</i>, are known almost only from those lost teeth.
+        </p>
+        <div class="pair">
+          <figure>
+            <figcaption>
+              <span class="title">Family</span>
+              <span class="hint" data-hint="click">Click a family to follow it</span>
+            </figcaption>
+            <div id="group" class="chart"></div>
+          </figure>
+          <figure>
+            <figcaption>
+              <span class="title">Diet</span>
+              <span class="hint" data-hint="click">Click to filter</span>
+            </figcaption>
+            <div id="diet" class="chart"></div>
+          </figure>
+        </div>
+        <p>
+          Diet tracks family closely. Click <button type="button" class="story" data-story="omnivores">the omnivores</button>, and nearly
+          all of them turn out to be theropods too: ostrich-mimics and beaked oddities that gave up a strict diet of meat.
+          Then follow the <button type="button" class="story" data-story="armored">armored and plated</button> dinosaurs back to the
+          timeline and watch them appear and vanish.
+        </p>
+      </section>
+
+      <section class="chapter">
+        <h2>Where the bones come out of the ground</h2>
+        <p>
+          Three in ten finds come from the United States. That reflects geology and history more than where dinosaurs
+          actually roamed. The badlands of Montana, Wyoming and Utah expose exactly the right rocks, and collectors have
+          worked them since the 1870s, when the bitter rivals Edward Drinker Cope and Othniel Charles Marsh raced each
+          other across the West. Today much of the new growth comes from China, Argentina and Brazil.
+        </p>
+        <figure class="wide">
+          <figcaption>
+            <span class="title">The ten richest countries, ranked by finds published in each period</span>
+            <span class="hint" data-hint="click">Click a line to follow a country</span>
+          </figcaption>
+          <div id="country" class="chart"></div>
+        </figure>
+        <p>
+          The United States has led in every period. Follow the other lines, though. Britain, third before 1950, has
+          slipped to ninth, while Spain climbed from near the bottom to second place in the 2000s and 2010s. In the 2020s,
+          Argentina and Brazil are the risers.
+        </p>
+        <p>
+          Pick <button type="button" class="story" data-story="gobi">Mongolia</button> and the cast changes. This is the Gobi Desert,
+          where Roy Chapman Andrews's expeditions found nests of fossil eggs in the 1920s, and where <i>Protoceratops</i>,
+          <i>Velociraptor</i> and <i>Tarbosaurus</i>, an Asian cousin of <i>T. rex</i>, weather out of red sandstone
+          cliffs. China, meanwhile, is the world's egg basket: pick it, and the eggs share further down the page jumps.
+        </p>
+      </section>
+
+      <section class="chapter">
+        <h2>A world on the move</h2>
+        <p>
+          Every dot on this map is a place where bones, teeth, eggs or footprints came out of the ground. The clusters
+          trace the badlands of the American West, the Gobi, the red cliffs of Patagonia and the farm country of
+          northeastern China: places where the right rock lies at the surface and someone came looking.
+        </p>
+        <figure class="wide map-figure">
+          <figcaption>
+            <span class="title">Where the finds were made, and where those places lay when the animals died</span>
+            <span class="hint" data-hint="drag" id="map-hint">Drag a box on today's map to pick a region</span>
+          </figcaption>
+          <div id="map" class="chart map"></div>
+          <p class="note">
+            Each dot gathers the finds in a two-degree square of today's map, sized by how many there are. Ancient
+            positions come from a model of moving tectonic plates (Merdith and colleagues, 2021), which moves each find
+            back to the middle of its own dated range. The land shapes are today's coastlines carried back with their
+            plates, at the moment closest to the average age of the finds on the map; ancient shorelines and shallow seas
+            are not drawn.
+          </p>
+        </figure>
+        <p>
+          None of those places sat where it sits today. The continents have drifted for the whole of dinosaur history, a
+          few centimeters a year, about as fast as fingernails grow. Switch the map to <em>When they lived</em> and every
+          find slides back to where its rock lay when the animal died.
+        </p>
+        <p>
+          Pick the <button type="button" class="story" data-story="triassic" data-layout="1">Late Triassic</button>, and the
+          first dinosaurs crowd onto Pangaea, a single supercontinent reaching from pole to pole. By the
+          <button type="button" class="story" data-story="jurassic" data-layout="1">Late Jurassic</button> it is splitting
+          along a young, narrow Atlantic, and the giants of the Morrison lived just across the water from their cousins in
+          Portugal. In the <button type="button" class="story" data-story="last" data-layout="1">last few million years</button>
+          the map looks almost familiar, but India is still an island drifting north toward Asia. What the map can't show
+          is the shallow sea that then flooded the middle of North America. <i>T. rex</i> and <i>Triceratops</i> lived on
+          its western shore, on a long strip of land now called Laramidia.
+        </p>
+      </section>
+
+      <section class="chapter">
+        <h2>Buried in a flood</h2>
+        <p>
+          A dinosaur became a fossil only if something buried it fast, before scavengers and weather could pull it
+          apart. Rivers in flood did that best, smothering carcasses in sand and mud, so most finds come from ancient
+          channels and floodplains. A few hundred lie in rock laid down in the open sea: bodies that drifted out,
+          bloated, and sank.
+        </p>
+        <div class="pair">
+          <figure>
+            <figcaption>
+              <span class="title">The 12 richest formations</span>
+              <span class="hint" data-hint="click">Click a formation</span>
+            </figcaption>
+            <div id="formation" class="chart"></div>
+          </figure>
+          <figure>
+            <figcaption>
+              <span class="title">Where the body came to rest</span>
+              <span class="hint" data-hint="click">Click to filter</span>
+            </figcaption>
+            <div id="environment" class="chart"></div>
+          </figure>
+        </div>
+        <p>
+          Compare <button type="button" class="story" data-story="morrison">the Morrison Formation</button>, the Late Jurassic home of
+          <i>Allosaurus</i>, <i>Stegosaurus</i> and <i>Diplodocus</i>, with
+          <button type="button" class="story" data-story="hellcreek">Hell Creek</button>, which preserves the last two million years
+          before the impact. Or see which dinosaurs ended up <button type="button" class="story" data-story="sea">at sea</button>.
+        </p>
+      </section>
+
+      <section class="chapter">
+        <h2>The hunters</h2>
+        <p>
+          In 1824 the English geologist and clergyman William Buckland described a jaw lined with blade-like teeth and
+          named its owner <i>Megalosaurus</i>, the first dinosaur ever named. For a century and a half afterward, finds
+          came in a trickle. Then the pace exploded: six in ten finds in the database were published after 2000, many of
+          them from China, where in 1996 a farmer in Liaoning Province split open a slab and found
+          <i>Sinosauropteryx</i>, the first dinosaur known to have feathers.
+        </p>
+        <figure class="wide">
+          <figcaption>
+            <span class="title">Finds by the year they were published</span>
+            <span class="hint" data-hint="drag">Drag to pick years</span>
+          </figcaption>
+          <div id="reported" class="chart"></div>
+        </figure>
+        <p>
+          The lonely spike in 1865 is a single book: the catalogue of Edward Hitchcock's collection at Amherst College,
+          published by his son the year after he died. Hitchcock spent decades gathering slabs of Connecticut Valley
+          sandstone printed with three-toed tracks, which he believed giant birds had made. About 2,400 finds in the
+          database are footprints like his, and 1,000 are eggs. Pick
+          <button type="button" class="story" data-story="footprints">footprints only</button>, and the timeline above slides back to
+          the Early Jurassic, when those New England tracks were pressed into muddy lake shores.
+        </p>
+        <figure class="medium">
+          <figcaption>
+            <span class="title">What was found</span>
+            <span class="hint" data-hint="click">Click to filter</span>
+          </figcaption>
+          <div id="kind" class="chart"></div>
+        </figure>
+      </section>
+
+      <section class="chapter">
+        <h2>Who is in your selection</h2>
+        <p>
+          These are the most common named dinosaurs among the finds you have picked. Many fossils can only be placed in a
+          family, "a theropod tooth" or "a duck-bill vertebra," so they don't appear here. Click a name to follow it
+          through every chart.
+        </p>
+        <div id="genera" class="genera"></div>
+        <figure class="wide">
+          <figcaption>
+            <span class="title">The finds</span>
+            <span class="hint">Click a column to sort</span>
+          </figcaption>
+          <div id="rows" class="rows"></div>
+        </figure>
+      </section>
+      <section class="explore" aria-labelledby="explore-title">
+        <div class="explore-head">
+          <h2 id="explore-title">Explore everything</h2>
+          <p>
+            Every chart from this page in one place, sharing the same selection. Drag on the timelines, click bars, and
+            watch the rest update. Your selection is kept in the page address, so you can share it.
+          </p>
+        </div>
+        <div class="explore-grid">
+          <figure class="cell span-2">
+            <figcaption><span class="title">Age, by family</span><span class="hint" data-hint="drag">Drag</span></figcaption>
+            <div id="x-age" class="chart"></div>
+          </figure>
+          <figure class="cell">
+            <figcaption><span class="title">Family</span><span class="hint" data-hint="click">Click</span></figcaption>
+            <div id="x-group" class="chart"></div>
+          </figure>
+          <figure class="cell span-2">
+            <figcaption><span class="title">Year published</span><span class="hint" data-hint="drag">Drag</span></figcaption>
+            <div id="x-reported" class="chart"></div>
+          </figure>
+          <figure class="cell">
+            <figcaption><span class="title">Diet</span><span class="hint" data-hint="click">Click</span></figcaption>
+            <div id="x-diet" class="chart"></div>
+            <figcaption class="sub"><span class="title">What was found</span></figcaption>
+            <div id="x-kind" class="chart"></div>
+          </figure>
+          <figure class="cell span-2">
+            <figcaption><span class="title">Where they were found</span><span class="hint" data-hint="drag">Drag</span></figcaption>
+            <div id="x-map" class="chart map"></div>
+          </figure>
+          <figure class="cell">
+            <figcaption><span class="title">Top countries over time</span><span class="hint" data-hint="click">Click</span></figcaption>
+            <div id="x-country" class="chart"></div>
+          </figure>
+          <figure class="cell">
+            <figcaption><span class="title">Richest formations</span><span class="hint" data-hint="click">Click</span></figcaption>
+            <div id="x-formation" class="chart"></div>
+          </figure>
+          <figure class="cell">
+            <figcaption><span class="title">Where the body came to rest</span><span class="hint" data-hint="click">Click</span></figcaption>
+            <div id="x-environment" class="chart"></div>
+            <figcaption class="sub"><span class="title">Most common names</span></figcaption>
+            <div id="x-genera" class="genera compact"></div>
+          </figure>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        <strong>Data:</strong> <a href="https://paleobiodb.org/">The Paleobiology Database</a>, CC BY 4.0, downloaded
+        November 2026: every occurrence of Dinosauria excluding birds, dated to the Mesozoic. Families come from the PBDB
+        classification. Each find is drawn at a random point inside its dated range. "Published" is the year of the reference that
+        recorded the find. Bird fossils and finds younger than 65 million years are left out.
+      </p>
+      <p>
+        <strong>Maps:</strong> Today's coastlines from <a href="https://www.naturalearthdata.com/">Natural Earth</a>,
+        public domain. Ancient coastlines and positions from the Merdith et al. (2021) plate model, reconstructed with the
+        <a href="https://gws.gplates.org/">GPlates Web Service</a>, CC BY 4.0.
+      </p>
+      <p>
+        <strong>Photo:</strong> <i>Triceratops</i> skull by Nekarius,
+        <a href="https://commons.wikimedia.org/wiki/File:Triceratops_skull_houston.JPG">Wikimedia Commons</a>, public
+        domain.
+      </p>
+      <p>
+        Built with <a href="https://github.com/dotgap/crossplot">crossplot</a>, a cross-filtering engine with
+        charts drawn by <a href="https://observablehq.com/plot/">Observable Plot</a>.
+      </p>
+    </footer>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

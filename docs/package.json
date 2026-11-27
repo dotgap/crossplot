@@ -1,0 +1,35 @@
+{
+  "name": "docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "api": "typedoc",
+    "dev": "pnpm -w build && pnpm api && vitepress dev",
+    "build": "pnpm -w build && pnpm api && vitepress build",
+    "preview": "vitepress preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@crossplot/core": "workspace:^",
+    "@crossplot/plot": "workspace:^",
+    "@crossplot/react": "workspace:^",
+    "@crossplot/svelte": "workspace:^",
+    "@crossplot/vue": "workspace:^",
+    "@observablehq/plot": "^0.6.19",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "svelte": "^5.57.3"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.1.1",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "typedoc": "^0.28.20",
+    "typedoc-plugin-markdown": "^4.14.1",
+    "typedoc-vitepress-theme": "^1.1.4",
+    "typescript": "~5.9.3",
+    "vite": "^6.4.4",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.0"
+  }
+}

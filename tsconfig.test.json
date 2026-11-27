@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "types": ["node"],
+    "jsx": "react-jsx",
+    "paths": {
+      "@crossplot/core": ["./packages/core/src/index.ts"],
+      "@crossplot/core/dom": ["./packages/core/src/dom/index.ts"],
+      "@crossplot/plot": ["./packages/plot/src/index.ts"],
+      "@crossplot/react": ["./packages/react/src/index.ts"],
+      "@crossplot/vue": ["./packages/vue/src/index.ts"],
+      "@crossplot/svelte": ["./packages/svelte/src/index.ts"]
+    }
+  },
+  "include": ["packages/*/test", "vitest.config.ts"]
+}

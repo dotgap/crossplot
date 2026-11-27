@@ -1,0 +1,58 @@
+{
+  "name": "@crossplot/vue",
+  "version": "0.1.0",
+  "description": "Vue 3 composables and a chart component for crossplot dashboards.",
+  "keywords": [
+    "crossfilter",
+    "cross-filter",
+    "coordinated-views",
+    "linked-charts",
+    "brushing",
+    "dashboard",
+    "data-visualization",
+    "charts",
+    "typescript",
+    "vue",
+    "composables"
+  ],
+  "homepage": "https://dotgap.github.io/crossplot/",
+  "bugs": {
+    "url": "https://github.com/dotgap/crossplot/issues"
+  },
+  "license": "MIT",
+  "author": "The crossplot authors",
+  "type": "module",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotgap/crossplot.git",
+    "directory": "packages/vue"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "peerDependencies": {
+    "@crossplot/core": "workspace:^",
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {
+    "@crossplot/core": "workspace:^",
+    "vue": "^3.5.0"
+  }
+}
