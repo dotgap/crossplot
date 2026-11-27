@@ -1,7 +1,7 @@
 # Dimensions and aggregates
 
 Every chart groups rows by a **dimension** and computes an **aggregate** per group. A dimension turns
-each row into a bin id, once, when the chart is created. After that, filtering is integer work.
+each row into a bin id once, when the chart is created. Filtering then works on these integer ids.
 
 ```ts
 dash.chart("#delay", {
@@ -31,8 +31,8 @@ bin("mass", { scale: "log", bins: 40 }); // bins even in log10 space; values <= 
 Without `clamp`, values outside the `extent` are left out of that chart (they still count in every
 other chart). Missing values are never drawn.
 
-Bins are only for drawing. Filters on a binned dimension are exact on raw values: a brush from 12.5 to
-17.25 keeps exactly the rows in `[12.5, 17.25)`, not whole bins.
+Bins only control how a chart is drawn. Filters on a binned dimension use raw values: a brush from 12.5
+to 17.25 keeps exactly the rows in `[12.5, 17.25)`, even where the brush ends partway through a bin.
 
 ## Categories
 
@@ -69,7 +69,7 @@ plain `{ range }` or `{ in }` filter, which applies to its x axis.
 ### Maps
 
 `lngLat(lng, lat, { step })` is a grid of longitude by latitude cells covering the whole world, for the
-Plot renderer's `map` mark. A box brushed on the map filters the raw coordinates, not the cells.
+Plot renderer's `map` mark. A box brushed on the map filters on the raw coordinates of each row.
 
 ```ts
 dash.chart("#map", { dimension: lngLat("lng", "lat", { step: 2 }), view: { mark: "map" } });

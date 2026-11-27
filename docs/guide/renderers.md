@@ -1,6 +1,6 @@
 # Renderers
 
-The core never draws. A **renderer** turns a chart's aggregated bins into pixels and reports what the
+The core package does not draw charts. A **renderer** turns a chart's aggregated bins into pixels and reports what the
 user did. `@crossplot/plot`, built on Observable Plot, is the first one; you can write your own for any
 plotting library, or plain DOM.
 

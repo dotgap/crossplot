@@ -1,7 +1,7 @@
 # The engine
 
-The engine is where rows get filtered and aggregated. It's built for brushing: a filter moving a few
-pixels should cost a few rows, not a full scan.
+The engine filters and aggregates rows. It is designed for brushing: when a brush moves by a few
+pixels, the engine visits only the rows near the brush edges instead of scanning the whole table.
 
 ## How it works
 

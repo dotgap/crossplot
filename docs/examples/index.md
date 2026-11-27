@@ -1,7 +1,7 @@
 # Examples
 
-Small dashboards that run right here in the page, each on the same 40,000 synthetic flights. The code
-under each one is the complete source of what you see, apart from the shared data generator.
+Each example is a small dashboard that runs in the page, using the same 40,000 synthetic flights. The
+code under each one is its complete source, apart from the shared data generator.
 
 - [Linked histograms](./linked-histograms): four binned charts, brushing along x.
 - [Categories and top-N](./categories): click selection, top-N with "Other", a `mean` aggregate and the
@@ -17,9 +17,9 @@ For a full page built with crossplot, see the [dinosaur demo](/demo/){target="_s
 
 ## The data
 
-The flights are generated in the browser from a fixed seed, so everyone sees the same numbers. Two
-departure waves, delays that grow through the day and peak in summer, and a long tail of origin
-airports. None of it is real.
+The flights are generated in the browser from a fixed seed, so everyone sees the same numbers. The
+generator produces two departure peaks, delays that increase through the day and peak in summer, and a
+long tail of origin airports. The data is not real.
 
 ::: details Data generator
 <<< @/examples/data.ts

@@ -53,8 +53,8 @@ dash.chart("#carrier", { dimension: category("carrier") });
 countDisplay(dash, "#count"); // "12,345 of 40,000 rows selected", with a reset button
 ```
 
-That's a working cross-filter. Drag across the hour chart and the delay and carrier charts redraw for
-the flights in that window; click a carrier bar to select it.
+The three charts are now linked. Drag across the hour chart and the delay and carrier charts redraw for
+the flights in that range. Click a carrier bar to select it.
 
 <script setup>
 import { mount } from "../examples/categories.ts";
@@ -62,7 +62,7 @@ import { mount } from "../examples/categories.ts";
 
 <LiveExample :run="mount" caption="Click bars to select carriers and origins, or drag across the hours" />
 
-A few things happened along the way:
+What these calls set up:
 
 - **The rows were converted once** into typed-array columns. Numbers and dates become `Float64Array`s,
   strings become dictionary-encoded categories.
