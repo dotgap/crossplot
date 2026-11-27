@@ -7,7 +7,8 @@
     "dev": "pnpm -w build && pnpm api && vitepress dev",
     "build": "pnpm -w build && pnpm api && vitepress build",
     "preview": "vitepress preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "data": "node scripts/dinosaurs.mjs"
   },
   "dependencies": {
     "@crossplot/core": "workspace:^",
