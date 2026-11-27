@@ -95,7 +95,7 @@ export default defineConfig({
           text: "Examples",
           items: [
             { text: "Overview", link: "/examples/" },
-            { text: "Linked histograms", link: "/examples/linked-histograms" },
+            { text: "Dinosaur finds", link: "/examples/dinosaur-finds" },
             { text: "Categories and top-N", link: "/examples/categories" },
             { text: "Heatmap brushing", link: "/examples/heatmap" },
             { text: "Filter state", link: "/examples/url-state" },

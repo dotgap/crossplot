@@ -1,5 +1,5 @@
 {
   "extends": "../tsconfig.base.json",
-  "compilerOptions": { "composite": false, "noEmit": true, "types": ["node"], "jsx": "react-jsx" },
+  "compilerOptions": { "composite": false, "noEmit": true, "types": ["node", "vite/client"], "jsx": "react-jsx" },
   "include": ["examples/**/*.ts", "examples/**/*.tsx", ".vitepress/config.ts"]
 }

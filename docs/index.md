@@ -39,25 +39,26 @@ features:
 ---
 
 <script setup>
-import { mount } from "./examples/linked-histograms.ts";
+import { mount } from "./examples/dinosaur-finds.ts";
 </script>
 
 <div class="cp-home">
 
 ## Example
 
-These four charts use the same table of 40,000 synthetic flights. Drag across a chart to filter the
-other three. Click without dragging to clear the filter.
+These five charts use the same table of 21,253 dinosaur fossil finds. Drag across the time chart or
+draw a box on the map to filter the other charts. Click without dragging to clear the filter.
 
-<LiveExample :run="mount" caption="Linked histograms, running in your browser" />
+<LiveExample :run="mount" caption="Linked charts, running in your browser" />
 
 ```ts
-const dash = await createDashboard({ data: flights, renderer: plotRenderer() });
+const dash = await createDashboard({ data: fromColumns(dinosaurs), renderer: plotRenderer() });
 
-dash.chart("#hour", { dimension: bin("hour", { step: 1, extent: [0, 24] }) });
-dash.chart("#delay", { dimension: bin("delay", { step: 10, extent: [-60, 180], clamp: true }) });
-dash.chart("#distance", { dimension: bin("distance", { scale: "log", bins: 30 }) });
-dash.chart("#date", { dimension: bin("date", { interval: "week" }) });
+dash.chart("#age", { dimension: [bin("age", { step: 2 }), "group"], view: { mark: "stackY" } });
+dash.chart("#map", { dimension: lngLat("lng", "lat", { step: 3 }), view: { mark: "map" } });
+dash.chart("#country", { dimension: top("country", 10), view: { sort: "-value" } });
+dash.chart("#diet", { dimension: "diet", view: { mark: "shareX" } });
+dash.chart("#reported", { dimension: bin("reported", { step: 5 }), view: { mark: "areaY" } });
 ```
 
 <a class="cp-demo-card" href="./demo/" target="_self">
