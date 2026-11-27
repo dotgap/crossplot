@@ -5,15 +5,15 @@
   </picture>
 </p>
 
-<p align="center">Coordinated, cross-filtered charts for TypeScript. A modern take on dc.js.</p>
+<p align="center">Cross-filtered charts for TypeScript, in the style of dc.js.</p>
 
 ---
 
-Brush one chart and every linked chart re-aggregates. crossplot owns the two hard parts, a fast
-cross-filter engine and a shared filter store, and hands drawing to pluggable renderers, starting
-with [Observable Plot](https://observablehq.com/plot/).
+Select a range in one chart and every linked chart updates to show only the matching rows. crossplot
+provides a cross-filter engine and a shared filter store. Charts are drawn by separate renderer
+packages. The first renderer uses [Observable Plot](https://observablehq.com/plot/).
 
-> **Status:** early development (0.x). APIs can still change between minor versions.
+> **Status:** 0.x on npm. The API can change between minor versions.
 
 ## Packages
 
@@ -25,7 +25,7 @@ with [Observable Plot](https://observablehq.com/plot/).
 | [`@crossplot/vue`](packages/vue) | Vue 3 composables with the same names (`useDashboard`, `useChart`, `useFilters`, `useSummary`, `useRows`) returning shallow refs, and a `<Chart>` component. SSR safe. | peer: `vue` >= 3.3 |
 | [`@crossplot/svelte`](packages/svelte) | Svelte 5 runes with the same names, returning reactive objects, and a `use:chart` action. SSR safe. | peer: `svelte` >= 5 |
 
-More renderers come later, as separate opt-in packages.
+Other renderers will be added later as separate packages.
 
 ## Example
 
@@ -65,8 +65,8 @@ behaviour. Charts are plain spec objects: a dimension, an aggregate (`count`, `s
   categorical, including top-N with "Other"), and row ids are counting-sorted by bin, then by value
   inside each bin.
 - **Filter bitmask.** One bit per dimension per row. A filter change only visits rows between the
-  old and new brush edges, and only rows whose bit flips touch the aggregates. Range filters are
-  exact on raw values at the brush edges, not snapped to bins. Changes that flip a large share of
+  old and new brush edges, and only rows whose bit flips touch the aggregates. Range filters
+  compare raw values at the brush edges, independent of the bins. Changes that flip a large share of
   rows recount in sequential passes instead.
 - **Prefix-sum tiles.** On large tables, dragging a brush on a binned chart switches to prefix sums
   over that chart's rows in value order (the approach of Falcon, Moritz et al. 2019):

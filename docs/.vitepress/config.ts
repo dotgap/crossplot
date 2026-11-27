@@ -18,8 +18,7 @@ export default defineConfig({
   base,
   lang: "en-US",
   title: "crossplot",
-  description:
-    "Coordinated, cross-filtered charts for TypeScript. Brush one chart and every linked chart re-aggregates.",
+  description: "Cross-filtered charts for TypeScript. Selecting data in one chart filters the other charts.",
   cleanUrls: true,
   lastUpdated: false,
   // The dinosaur demo is built separately and copied to /demo/ by the deploy workflow.

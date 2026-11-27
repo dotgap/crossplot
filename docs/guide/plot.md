@@ -68,8 +68,8 @@ dash.chart("#map", {
 
 Drag to brush; a click without dragging clears the brush. On category charts a click selects a bar,
 clicking more bars adds them with `"multi"`, and clicking outside the bars clears the selection.
-Brushing uses a small pointer-event overlay, not d3-brush, and inverts pixels through Plot's own x and
-y scales, so filters land on exact data values.
+Brushing is implemented with a pointer-event overlay and does not use d3-brush. Pixel positions are
+inverted through Plot's x and y scales, so filters use exact data values.
 
 ## Ordering and labels
 
@@ -126,5 +126,5 @@ view: {
 }
 ```
 
-`title`, `width`, `height`, `xLabel` and `yLabel` do what they say; the width follows the container
-unless you set it.
+`title`, `width`, `height`, `xLabel` and `yLabel` set the chart title, size and axis labels. The width
+follows the container unless you set it.

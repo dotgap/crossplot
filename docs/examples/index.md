@@ -1,11 +1,11 @@
 # Examples
 
-Small dashboards that run right here in the page. The first uses 21,253 real dinosaur finds; the
-others share 40,000 synthetic flights. The code under each one is the complete source of what you
-see, apart from the shared data loader or generator.
+Each example is a small dashboard that runs in the page. The first uses 21,253 real dinosaur finds,
+and the others use the same 40,000 synthetic flights. The code under each one is its complete source,
+apart from the shared data loader or generator.
 
 - [Dinosaur finds](./dinosaur-finds): real fossil data on a stacked time series, a map, ranked bars and
-  a part-of-whole bar, where every brush reshapes the rest.
+  a part-of-whole bar. Brushing any chart filters the others.
 - [Categories and top-N](./categories): click selection, top-N with "Other", a `mean` aggregate and the
   `compare` outline.
 - [Heatmap brushing](./heatmap): a two-dimensional brush and stacked bars.
@@ -19,9 +19,9 @@ For a full page built with crossplot, see the [dinosaur demo](/demo/){target="_s
 
 ## The data
 
-The flights are generated in the browser from a fixed seed, so everyone sees the same numbers. Two
-departure waves, delays that grow through the day and peak in summer, and a long tail of origin
-airports. None of it is real.
+The flights are generated in the browser from a fixed seed, so everyone sees the same numbers. The
+generator produces two departure peaks, delays that increase through the day and peak in summer, and a
+long tail of origin airports. The data is not real.
 
 ::: details Data generator
 <<< @/examples/data.ts

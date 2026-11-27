@@ -40,7 +40,7 @@ Changes are coalesced. However many filters change within one animation frame, t
 one request to the engine and draws once with the result. If the engine is still busy with an older
 request, newer changes wait and older results are never drawn over newer ones.
 
-`dash.idle()` resolves when everything requested so far has been drawn, which is handy in tests:
+`dash.idle()` resolves when everything requested so far has been drawn, which is useful in tests:
 
 ```ts
 dash.filters.set("hour", { range: [6, 9] });

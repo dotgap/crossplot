@@ -26,7 +26,8 @@ and drops one at 21.0.
 
 Each chart aggregates the rows that pass **every filter except its own**. When you brush the hour
 chart, the hour chart keeps drawing all hours, highlighting the brushed ones, while every other chart
-redraws for the flights in that window. That's what lets you move a brush around and compare.
+redraws for the flights in that range. This lets you move the brush and compare each selection with
+the full distribution.
 
 A chart's own filter is still applied to every other chart, and to the dashboard's `summary` and
 `rows()`.
