@@ -1,9 +1,11 @@
 # Examples
 
-Small dashboards that run right here in the page, each on the same 40,000 synthetic flights. The code
-under each one is the complete source of what you see, apart from the shared data generator.
+Small dashboards that run right here in the page. The first uses 21,253 real dinosaur finds; the
+others share 40,000 synthetic flights. The code under each one is the complete source of what you
+see, apart from the shared data loader or generator.
 
-- [Linked histograms](./linked-histograms): four binned charts, brushing along x.
+- [Dinosaur finds](./dinosaur-finds): real fossil data on a stacked time series, a map, ranked bars and
+  a part-of-whole bar, where every brush reshapes the rest.
 - [Categories and top-N](./categories): click selection, top-N with "Other", a `mean` aggregate and the
   `compare` outline.
 - [Heatmap brushing](./heatmap): a two-dimensional brush and stacked bars.

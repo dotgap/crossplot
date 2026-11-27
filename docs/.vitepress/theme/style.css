@@ -280,6 +280,23 @@
   margin: 4px 0 8px;
 }
 
+.cp-live .cp-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-size: 0.8125rem;
+  color: var(--vp-c-text-2);
+  margin: 0 0 8px;
+}
+
+.cp-live .cp-legend i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin-right: 6px;
+}
+
 .cp-live pre.cp-out {
   margin: 8px 0;
   padding: 10px 12px;
